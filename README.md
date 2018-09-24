@@ -22,6 +22,7 @@ public class GUI extends JFrame//Login Class for the program
      private final JTextField name;
      private final JLabel pl;
      private final JPasswordField pass;
+     private final JCheckBox check;
      
      GUI()
      { 
@@ -34,6 +35,7 @@ public class GUI extends JFrame//Login Class for the program
         pl = new JLabel("Password: ");
         pass = new JPasswordField(21);
         JButton ln = new JButton("Login");
+        check = new JCheckBox("Remember Password");
                 
         
         mp.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -42,6 +44,7 @@ public class GUI extends JFrame//Login Class for the program
         mp.add(pl);
         mp.add(pass);
         mp.add(ln);
+        mp.add(check);
         mf.add(mp);
         
         add(mp);
