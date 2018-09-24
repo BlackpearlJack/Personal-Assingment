@@ -34,8 +34,7 @@ public class GUI extends JFrame//Login Class for the program
         pl = new JLabel("Password: ");
         pass = new JPasswordField(21);
         JButton ln = new JButton("Login");
-        JButton cl = new JButton("Clear");
-        
+                
         
         mp.setLayout(new FlowLayout(FlowLayout.CENTER));
         mp.add(nl);
@@ -43,7 +42,6 @@ public class GUI extends JFrame//Login Class for the program
         mp.add(pl);
         mp.add(pass);
         mp.add(ln);
-        mp.add(cl);
         mf.add(mp);
         
         add(mp);
