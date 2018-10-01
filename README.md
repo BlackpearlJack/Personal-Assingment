@@ -275,7 +275,7 @@ public class MyPersonalAssignment{
     public static void main(String[] args) {
         // TODO code application logic here
               
-        new GUI();
+        new Login_receptionist();
        
     }
     
