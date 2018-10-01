@@ -61,7 +61,7 @@ public class MyConnection {
 
           
 }
-/*
+/*login form form for the program
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -76,7 +76,7 @@ import java.sql.*;
 
 
 /**
- *login form form for the program
+ *
  * @author Lester
  */
 public class Login_receptionist extends JFrame
@@ -177,7 +177,92 @@ public class al implements ActionListener{
 }
 }
 
+/*New user Class to add new users
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package example;
 
+import static example.MyConnection.getConnection;
+import static example.MyConnection.prepareStatement;
+import java.awt.event;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.sql.*;
+import java.util.logging.*;
+
+/**
+ *
+ * @author Lester
+ */
+public class New_User_Class extends JFrame {
+    
+   
+    //Declaration of values
+    private final JLabel Firstname;
+    private final JTextField fname;
+    private final JTextField sname;
+    
+    private final JPanel Secondpanel;
+    private final JLabel Secondname;
+    private final JLabel tel;
+    private final JTextField tele;
+   
+    
+    private final JLabel Adress;
+    private final JTextField ad;
+    private final JButton usernew;
+    private final JButton xt;
+    private event.ActionListener ActionListener;
+    
+    New_User_Class() {
+        
+        
+        
+        JFrame nuc = new JFrame("New_User_Class");//header file
+        Secondpanel = new JPanel();
+        Firstname = new JLabel("Firstname: ");
+        fname = new JTextField();
+        fname.setColumns(21);
+        Secondname = new JLabel("Secondname: ");
+        sname = new JTextField();
+        sname.setColumns(21);
+        tel =new JLabel("Telephone: ");
+        tele =new JTextField();
+        tele.setColumns(21);
+        Adress = new JLabel("Address");
+        ad = new JTextField();
+        ad.setColumns(20);
+        usernew = new JButton("Create User");
+        xt = new JButton("Cancel");
+        
+    
+    
+        //Function to output the values stated in the New user class window
+        Secondpanel.add(Firstname);
+        Secondpanel.add(fname);
+        Secondpanel.add(Secondname);
+        Secondpanel.add(sname);
+        Secondpanel.add(tel);
+        Secondpanel.add(tele);
+        Secondpanel.add(Adress);
+        Secondpanel.add(ad);
+        Secondpanel.add(usernew);
+        Secondpanel.add(xt);
+        
+        
+        
+        add(Secondpanel);
+        setSize(1200, 800);// setting size of the window
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//function to close program if window is closed 
+        setVisible(true);
+         
+    }
+  
+        
+    }
 
 /**
  *
