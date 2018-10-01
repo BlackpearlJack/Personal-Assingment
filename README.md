@@ -65,7 +65,60 @@ public class GUI extends JFrame//Login Class for the program
  * and open the template in the editor.
  */
 package example;
+/* My Connection class to connectthe databse using j connector
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package example;
 
+import java.sql.*;
+import com.mysql.jdbc.Driver;
+
+
+/**
+ *
+ * @author Lester
+ */
+public class MyConnection {
+
+    static PreparedStatement preparestatement(String select__from_login_WHERE_UsernameMax_AND_) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+  //Values Initialization and declaration
+    private Connection con = null;
+    private String query1 = null;
+    private ResultSet rs;
+    private final String url=("jdbc:mysql://localhost:3306/registrationform");
+    private final String usrname = "root";
+    private final String usrpass = "";
+    
+    //Function to connect with mysql database
+    public MyConnection(){
+      
+        try{
+            //Establish connection
+            Class.forName("com.mysql.cj.jdbc.Driver");
+           System.out.print("Connection attained");//connection to driver successful
+                               
+        } catch (Exception e)
+        {
+            System.out.print("Connection Error");//Output if connection to driver fails          
+        }
+        try{
+            con = (Connection) DriverManager.getConnection(url,usrname,usrpass);
+            System.out.print("Connection to database was a success");//output for successful connection to database
+        }
+        catch(SQLException e)
+        {
+            System.out.print("Connection to database failed");
+            
+        }
+    }
+
+          
+}
 
 
 
