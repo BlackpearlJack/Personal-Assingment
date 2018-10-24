@@ -24,9 +24,10 @@ import com.mysql.jdbc.Driver;
  */
 public class MyConnection {
 
-    static PreparedStatement preparestatement(String select__from_login_WHERE_UsernameMax_AND_) {
+    static PreparedStatement prepareStatement(String queryl) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 
   //Values Initialization and declaration
     private Connection con = null;
@@ -38,18 +39,9 @@ public class MyConnection {
     
     //Function to connect with mysql database
     public MyConnection(){
-      
+          //Establish a connection to the database
         try{
-            //Establish connection
-            Class.forName("com.mysql.cj.jdbc.Driver");
-           System.out.print("Connection attained");//connection to driver successful
-                               
-        } catch (Exception e)
-        {
-            System.out.print("Connection Error");//Output if connection to driver fails          
-        }
-        try{
-            con = (Connection) DriverManager.getConnection(url,usrname,usrpass);
+            con =  DriverManager.getConnection(url,usrname,usrpass);
             System.out.print("Connection to database was a success");//output for successful connection to database
         }
         catch(SQLException e)
@@ -61,7 +53,7 @@ public class MyConnection {
 
           
 }
-/*login form form for the program
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -72,11 +64,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
 /**
- *
+ *Class for the login GUI
  * @author Lester
  */
 public class Login_receptionist extends JFrame
@@ -128,55 +122,51 @@ public class Login_receptionist extends JFrame
      ln.addActionListener(new al());
      }
      
-public class al implements ActionListener{
+private class al implements ActionListener{
 
 
-    public void ActionPerformed( ActionEvent ae){
-//Action to get data from databse after clicking login button
-        if(name.getText().length()==0){//To check empty field
-            JOptionPane.showMessageDialog(null,"Please fill up all fields");}
-        else if(pass.getPassword().length==0){//To check empty field
-            JOptionPane.showMessageDialog(null,"Please Key in Password");}
-        else{
-            String user = name.getText();//get input
-            char[] upass= pass.getPassword();//get input
-            String pwd = String.copyValueOf(upass);//converting to string from array
-            if(validate_login(user,pwd)){
-                JOptionPane.showMessageDialog(null,"Login Successful");
-            }
-            else{
-                JOptionPane.showInternalMessageDialog(null,"Login Failed");
-            }
-        }
-    } 
-    private boolean validate_login(String username,String password){
-        try{//Connection to database to initialize the querry
-            Class.forName("com.mysql.jdbc.Driver");//MySQL Database Connection
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/registrationform","root","");
-            PreparedStatement stm = conn.prepareStatement("SELECT * FROM login WHERE Username");
-            stm.setString(1, username);
-            stm.setString(2, password);
-            ResultSet rs = stm.executeQuery();
+    private void ActionPerformed( ActionEvent ae) throws SQLException, ClassNotFoundException{
+        
+            PreparedStatement ps;
+            ResultSet rs;
+            String uname = name.getText();
+            String upass = String.valueOf(pass.getPassword());
+            
+        String queryl = "SELECT * FROM 'registationform.login'";
+        
+        try{
+            ps = MyConnection.prepareStatement(queryl);
+            
+            ps.setString(1,uname);
+            ps.setString(2, upass);
+            
+            rs = ps.executeQuery();
+            
             if(rs.next())
-                return (true);
-            else
-                return (false);
+            {    //option window to show if login is successful
+                JOptionPane.showMessageDialog(null, "WELCOME");
+          
+            }
+            else{//Option window to show if login is not successful
+                JOptionPane.showMessageDialog(null, "Access Denied");
+            }
+        }catch(SQLException e){
+            Logger.getLogger(Login_receptionist.class.getName()).log(Level.SEVERE, null,e);
         }
-        catch(Exception e){
-            e.printStackTrace();
-            return false;
-        }
+
+                                                                              
 }
 
         @Override
         public void actionPerformed(ActionEvent ae) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
-    
-                                                                              
-}
-}
 
+        private Object MyConnection() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+     }
+}
 /*New user Class to add new users
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
