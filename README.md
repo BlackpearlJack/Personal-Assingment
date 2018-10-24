@@ -186,10 +186,8 @@ import java.util.logging.*;
  *
  * @author Lester
  */
-public class New_User_Class extends JFrame {
-    
-   
-    //Declaration of values
+public class New_User_Class extends JFrame {      
+//Declaration of values    
     private final JLabel Firstname;
     private final JTextField fname;
     private final JTextField sname;
@@ -198,25 +196,29 @@ public class New_User_Class extends JFrame {
     private final JLabel Secondname;
     private final JLabel tel;
     private final JTextField tele;
-   
-    
+    private final JLabel Username;
+    private final JTextField uname;    
     private final JLabel Adress;
     private final JTextField ad;
+    private final JLabel gender;
+    private final JTextField sex;
     private final JButton usernew;
     private final JButton xt;
-    private event.ActionListener ActionListener;
+    
     
     New_User_Class() {
         
         
-        
-        JFrame nuc = new JFrame("New_User_Class");//header file
+    //Values Initialization    
+        JFrame nuc = new JFrame("New_User_Class");
         Secondpanel = new JPanel();
         Firstname = new JLabel("Firstname: ");
         fname = new JTextField();
         fname.setColumns(21);
         Secondname = new JLabel("Secondname: ");
         sname = new JTextField();
+        Username = new JLabel("Username: ");
+        uname = new JTextField(11);        
         sname.setColumns(21);
         tel =new JLabel("Telephone: ");
         tele =new JTextField();
@@ -224,35 +226,101 @@ public class New_User_Class extends JFrame {
         Adress = new JLabel("Address");
         ad = new JTextField();
         ad.setColumns(20);
+        gender = new JLabel("Gender");
+        sex = new JTextField();
+        sex.setColumns(1);
         usernew = new JButton("Create User");
         xt = new JButton("Cancel");
         
-    
-    
-        //Function to output the values stated in the New user class window
+    //Output of initialized values    
         Secondpanel.add(Firstname);
         Secondpanel.add(fname);
         Secondpanel.add(Secondname);
         Secondpanel.add(sname);
+        Secondpanel.add(Username);
+        Secondpanel.add(uname);
         Secondpanel.add(tel);
         Secondpanel.add(tele);
         Secondpanel.add(Adress);
         Secondpanel.add(ad);
+        Secondpanel.add(gender);
+        Secondpanel.add(sex);
         Secondpanel.add(usernew);
         Secondpanel.add(xt);
+        nuc.add(Secondpanel);
         
         
-        
-        add(Secondpanel);
-        setSize(1200, 800);// setting size of the window
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//function to close program if window is closed 
-        setVisible(true);
-         
+        nuc.add(Secondpanel);
+        nuc.setSize(1200, 800);
+        nuc.setLocationRelativeTo(null);
+        nuc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        nuc.setVisible(true);
+    usernew.addActionListener(new ad());
     }
-  
+  public boolean checkUsername(String username) throws ClassNotFoundException
+    {
+        PreparedStatement ps;
+        ResultSet rs;
+        boolean checkUser = false;
+        String query = "SELECT * FROM registrationform.registration WHERE Username ='?'";
         
+        try {
+            ps = MyConnection.prepareStatement(query);
+            ps.setString(1, username);
+            
+            rs = ps.executeQuery();
+            
+            if(rs.next())
+            {
+                checkUser = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(New_User_Class.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return checkUser;
     }
+    
+private class ad implements ActionListener{
+
+private void ActionPerformed( ActionEvent ea) throws SQLException, ClassNotFoundException{
+    String frtname = fname.getText();
+    String sndname = sname.getText();
+    String usrname = uname.getText();
+    String telephone = tele.getText();
+    String sexa = sex.getText();
+    String adress = Adress.getText();
+    
+   if(checkUsername(uname)){
+       JOptionPane.showMessageDialog(null,"Client already exists");
+   }
+   else{
+      
+   }
+   PreparedStatement pv;
+   String queryx ="INSERT INTO registrationform.registration (`Firstname`, `Lastname`, `Telephone`, `Adress`, `Gender`, `Username`)VALUES ('?', '?', '?', '?', '?', '?')";
+
+   try{
+       pv = MyConnection.prepareStatement(queryx);
+       
+       pv.setString(1,frtname);
+       pv.setString(2,sndname);
+       pv.setString(3,usrname);
+       pv.setString(4,telephone);
+       pv.setString(5,sexa);
+       pv.setString(5,adress);
+   }catch(SQLException ne){
+     Logger.getLogger(New_User_Class.class.getName()).log(Level.SEVERE, null, ne);  
+       
+   }
+}    
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    }   
+}
+
 
 /**
  *
