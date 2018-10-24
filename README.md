@@ -338,3 +338,63 @@ public class MyPersonalAssignment{
     }
     
 }
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mypersonalassignment;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+/**
+ *
+ * @author Lester
+ */
+public class Home_Page {
+    private final  JButton adu;
+    private final  JButton lg;
+Home_Page(){ 
+    JFrame hpg = new JFrame("Home_Page");
+    JPanel cod = new JPanel();
+    adu = new JButton("Add User");
+    lg = new JButton("Logout");
+    
+    cod.add(adu);
+    cod.add(lg);    
+    hpg.add(cod);
+    
+    hpg.setSize(1200, 800);
+    hpg.setLocationRelativeTo(null);
+    hpg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    hpg.setVisible(true);
+    
+    adu.addActionListener(new home());
+    lg.addActionListener(new out());
+}
+private class home implements ActionListener{
+    private void ActionPerformed(ActionEvent he){
+        new New_User_Class();
+    }
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    }
+private class out implements ActionListener{
+    private void ActionPerformed(ActionEvent ut){
+        new Login_receptionist();
+    }
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    }
+}
+
